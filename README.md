@@ -4,6 +4,9 @@
 
 It's currently being used to generate frontend-friendly metrics for the `top` command at [nebezb.com](https://nebezb.com/).
 
+<img src="demo.gif" align="center" width="400" alt="Demo">
+
+
 ## Requirements
 
 - `node`
