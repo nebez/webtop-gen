@@ -4,8 +4,9 @@
 
 It's currently being used to generate frontend-friendly metrics for the `top` command at [nebezb.com](https://nebezb.com/).
 
-<img src="demo.gif" align="center" width="400" alt="Demo">
-
+<p align="center">
+    <img src="demo.gif" width="400" alt="Demo">
+</p>
 
 ## Requirements
 
