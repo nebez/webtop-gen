@@ -38,6 +38,8 @@ node webtop-gen.js \
   --disk-temp-id="nvme-pci/Composite"
 ```
 
+> **note**: by default, disks with `efi` in the name are excluded. 🤷
+
 ## Discovering sensor IDs
 
 Use `chip/label` exactly as shown after running `sensors`:
