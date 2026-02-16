@@ -48,9 +48,9 @@ Use `chip/label` exactly as shown after running `sensors`:
 - Disk: `nvme-pci/Composite`
 
 
-## systemd (every 10s)
+## systemd
 
-I write these stats every few seconds using systemd. If you want to do the same, use a service file similar to the one below. Pay attention to `YOUR_USER` and `SCRIPT_PATH` placeholders.
+I write these stats to a file on my server every few seconds using systemd. If you want to do the same, use a service file similar to the one below. Pay attention to `YOUR_USER` and `SCRIPT_PATH` placeholders.
 
 `/etc/systemd/system/webtop-live.service`
 
@@ -85,7 +85,7 @@ Persistent=true
 WantedBy=timers.target
 ```
 
-Installation
+#### Installation
 
 ```bash
 sudo systemctl daemon-reload
