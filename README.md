@@ -1,8 +1,8 @@
 # webtop-gen
 
-`webtop-gen` captures live Linux host telemetry (CPU, memory, disks, network, temperatures) as JSON for an interface to consume in batched ticks.
+`webtop-gen` captures live Linux host telemetry (CPU, memory, disks, network, temperatures) as JSON for an interface to consume in batched ticks. Scroll down for `systemd` install instructions.
 
-It's currently being used to generate frontend-friendly metrics for the `top` command at [nebezb.com](https://nebezb.com/). Scroll down for `systemd` install instructions.
+It's currently being used to generate frontend-friendly metrics for the `top` command at [nebezb.com](https://nebezb.com/).
 
 ## Requirements
 
@@ -15,7 +15,7 @@ It's currently being used to generate frontend-friendly metrics for the `top` co
 ## Usage
 
 ```bash
-node webtop-gen.js --out=/absolute/path/webtop.json
+node webtop-gen.js --out=stats.json
 ```
 
 - `--out=<path>` output file path (required)
@@ -31,7 +31,7 @@ Example:
 
 ```bash
 node webtop-gen.js \
-  --out=/srv/webtop/webtop.mock.json \
+  --out=/tmp/stats.json \
   --updates=10 \
   --interval-ms=1000 \
   --cpu-temp-id="k10temp-pci/Tctl" \
@@ -65,7 +65,7 @@ Type=oneshot
 User=YOUR_USER
 Group=YOUR_USER
 WorkingDirectory=SCRIPT_PATH
-ExecStart=/usr/bin/node SCRIPT_PATH/scripts/webtop-gen.js --out=SCRIPT_PATH/src/lib/mocks/webtop.mock.json --updates=10 --interval-ms=1000 --cpu-temp-id=k10temp-pci/Tctl --disk-temp-id=nvme-pci/Composite
+ExecStart=/usr/bin/node SCRIPT_PATH/webtop-gen.js --out=/tmp/stats.json --updates=10 --interval-ms=1000 --cpu-temp-id=k10temp-pci/Tctl --disk-temp-id=nvme-pci/Composite
 ```
 
 `/etc/systemd/system/webtop-live.timer`:
