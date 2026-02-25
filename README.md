@@ -15,6 +15,7 @@ It's currently being used to generate frontend-friendly metrics for the `top` co
 - `/proc`
 - `/sys`
 - *optionally* `lm-sensors` (`sensors`) for explicit sensor selection
+- *optionally* `nut-client` (`upsc`) for UPS metrics
 
 ## Usage
 
@@ -29,6 +30,7 @@ node webtop-gen.js --out=stats.json
 - `--max-disks=<n>` max disk rows to emit (default: `8`)
 - `--cpu-temp-id=<id>` preferred CPU sensor id (e.g. `k10temp-pci/Tctl`)
 - `--disk-temp-id=<id>` preferred disk sensor id (e.g. `nvme-pci/Composite`)
+- `--ups-server=<target>` optional NUT `upsc` target (e.g. `ups@home-server.local`, or `upsc ups@home-server.local`)
 - `--help` show help
 
 Example:
@@ -39,7 +41,8 @@ node webtop-gen.js \
   --updates=10 \
   --interval-ms=1000 \
   --cpu-temp-id="k10temp-pci/Tctl" \
-  --disk-temp-id="nvme-pci/Composite"
+  --disk-temp-id="nvme-pci/Composite" \
+  --ups-server="ups@home-server.local"
 ```
 
 > **note**: by default, disks with `efi` in the name are excluded. 🤷
@@ -69,7 +72,7 @@ Type=oneshot
 User=YOUR_USER
 Group=YOUR_USER
 WorkingDirectory=SCRIPT_PATH
-ExecStart=/usr/bin/node SCRIPT_PATH/webtop-gen.js --out=/tmp/stats.json --updates=10 --interval-ms=1000 --cpu-temp-id=k10temp-pci/Tctl --disk-temp-id=nvme-pci/Composite
+ExecStart=/usr/bin/node SCRIPT_PATH/webtop-gen.js --out=/tmp/stats.json --updates=10 --interval-ms=1000 --cpu-temp-id=k10temp-pci/Tctl --disk-temp-id=nvme-pci/Composite --ups-server=ups@home-server.local
 ```
 
 `/etc/systemd/system/webtop-live.timer`:
