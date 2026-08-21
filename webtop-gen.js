@@ -216,13 +216,26 @@ async function readUpsSnapshot(upsServer) {
             maxBuffer: 1024 * 1024,
         });
         const values = parseUpscOutput(stdout || "");
+        const loadPct = parseOptionalNumber(values["ups.load"]);
+        const nominalRealPowerW = parseOptionalNumber(
+            values["ups.realpower.nominal"],
+        );
+        const estimatedPowerW =
+            loadPct == null || nominalRealPowerW == null
+                ? null
+                : round2(
+                      (Math.max(0, loadPct) *
+                          Math.max(0, nominalRealPowerW)) /
+                          100,
+                  );
 
         return {
             source: "nut",
             status: values["ups.status"] ?? "unknown",
             batteryChargePct: parseOptionalNumber(values["battery.charge"]),
             batteryRuntimeSec: parseOptionalNumber(values["battery.runtime"]),
-            loadPct: parseOptionalNumber(values["ups.load"]),
+            loadPct,
+            estimatedPowerW,
             outputVoltageV: parseOptionalNumber(values["output.voltage"]),
         };
     } catch (error) {

@@ -17,6 +17,10 @@ It's currently being used to generate frontend-friendly metrics for the `top` co
 - *optionally* `lm-sensors` (`sensors`) for explicit sensor selection
 - *optionally* `nut-client` (`upsc`) for UPS metrics
 
+When NUT provides both `ups.load` and `ups.realpower.nominal`, the UPS snapshot
+includes `estimatedPowerW`, calculated as nominal real power multiplied by load
+percentage. This is an estimate, not a measured wattage value.
+
 ## Usage
 
 ```bash
